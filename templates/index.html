@@ -1,19 +1,20 @@
 {% extends "base.html" %}
 {% block content %}
-    {% for post in posts %}
-    <article class="post">
-        <header>
-            <div>
-                <hi>{{ post.title }}</hi>
-                <div class="about">by {{post.author}} on {{post.created.strftime('%d-%m-%Y')}}</div>
-            </div>
-        </header>
-        <p class="body">{{post.body}}</p>
-    </article>
-    {% if not loop.last %}
-    <hr>
+{% for post in posts %}
+<article class="post">
+    <header>
+        <div>
+            <hi>{{ post.title }}</hi>
+            <div class="about">by {{post.author.username}} on {{post.created.strftime('%d-%m-%Y')}}</div>
+        </div>
+    </header>
+    <p class="body"> {{post.body}}</p>
+</article>
+{% if not loop.last %}
+        <hr>
     {% endif %}
-    {% endfor %}
-    {% endblock %}
+ {% else %}
+    <p class="no-posts"> Ops.. There are no posts to display! </p>
 
-
+  {% endfor %}
+{% endblock %}

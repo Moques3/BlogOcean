@@ -1,6 +1,6 @@
-html {
+html{
   font-family: sans-serif;
-  background: rgb(185, 179, 179);
+  background: #eee;
   padding: 1rem;
 }
 body{
@@ -8,25 +8,29 @@ body{
   margin: 0 auto;
   background: white;
 }
-h1 {
+h1{
   font-family: serif;
   color: #377ba8;
-  margin: 1 rem 0;
+  margin: 1rem 0;
 }
 hr{
   border: none;
-  border-top: 1px solid lightgray ;
+  border-top: 1px solid lightgray;
 }
 .content{
   padding: 0 1rem 1rem;
 }
 .post > header > div:first-of-type{
-  
+  flex: auto;
 }
-.post.about{
+.post .about{
   color: slategray;
   font-style: italic;
 }
-.post.body{
+.post .body{
   white-space: pre-line;
+}
+.no-posts{
+  font-style: italic;
+  color: gray;
 }
