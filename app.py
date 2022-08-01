@@ -4,7 +4,7 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager, UserMixin, current_user, logout_user, login_user, login_required
 from werkzeug.security import check_password_hash, generate_password_hash
 from sqlalchemy.exc import IntegrityError
-import os 
+import os
 
 app = Flask("hello")
 db_url = os.environ.get("DATABASE_URL") or "sqlite:///app.db"
@@ -27,11 +27,10 @@ class Post(db.Model):
 
 class User(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    username = db.Column(db.String(20), nullable=False,
-                         unique=True, index=True)
+    username = db.Column(db.String(20), nullable=False, unique=True, index=True)
     email = db.Column(db.String(64), nullable=False, unique=True, index=True)
     password_hash = db.Column(db.String(128), nullable=False)
-    post = db.relationship('Post', backref='author')
+    posts = db.relationship('Post', backref='author')
 
 
 def set_password(self, password):
@@ -52,7 +51,7 @@ db.create_all()
 
 @app.route("/")
 def index():
-    posts = Post.query.order_by(-Posts.created).all()
+    posts = Post.query.order_by(-Post.created).all()
     return render_template("index.html", posts=posts)
 
 
@@ -66,11 +65,11 @@ def register():
         password = request.form['password']
         try:
             new_user = User(username=username, email=email)
-            new_user. set_password(password)
+            new_user.set_password('password')
             db.session.add(new_user)
             db.session.commit()
         except IntegrityError:
-            flash("Username or E-mail already exists")
+            flash("Username or E-mail already exists!")
         else:
             return redirect(url_for('login'))
     return render_template('register.html')
